@@ -52,15 +52,36 @@ const CitiesProvider = ({ children }) => {
       console.log(data);
       setCities(cities => [...cities, data]);
     } catch (err) {
-      alert('There was an error loading city');
+      alert('There was an error creating city');
     } finally {
       setIsLoading(false);
     }
   } // will add newly created city to the API SERVER
 
+  async function deleteCity(id) {
+    try {
+      setIsLoading(true);
+      await fetch(`${BASE_URL}/cities/${id}`, {
+        method: 'DELETE',
+      });
+      setCities(cities => cities.filter(city => city.id !== id));
+    } catch (err) {
+      alert('There was an error deleting city');
+    } finally {
+      setIsLoading(false);
+    }
+  } // will delete city acc to id from the API SERVER
+
   return (
     <CitiesContext.Provider
-      value={{ cities, isLoading, currentCity, getCity, createCity }}
+      value={{
+        cities,
+        isLoading,
+        currentCity,
+        getCity,
+        createCity,
+        deleteCity,
+      }}
     >
       {children}
     </CitiesContext.Provider>
