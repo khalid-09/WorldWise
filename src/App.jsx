@@ -4,6 +4,7 @@ import Homepage from './pages/Homepage';
 import Product from './pages/Product';
 import Pricing from './pages/Pricing';
 import Login from './pages/Login';
+import ProtectedRoute from './pages/ProtectedRoute';
 import AppLayout from './pages/AppLayout';
 import PageNotFound from './pages/PageNotFound';
 import CityList from './components/CityList';
@@ -28,7 +29,14 @@ function App() {
               <Route path="product" element={<Product />} />
               <Route path="pricing" element={<Pricing />} />
               <Route path="login" element={<Login />} />
-              <Route path="app" element={<AppLayout />}>
+              <Route
+                path="app"
+                element={
+                  <ProtectedRoute>
+                    <AppLayout />
+                  </ProtectedRoute>
+                } // wrapping the AppLayout to check weather is user logged in or not
+              >
                 <Route index element={<Navigate to="cities" replace />} />
                 <Route path="cities/:id" element={<City />} />
                 <Route path="cities" element={<CityList />} />
