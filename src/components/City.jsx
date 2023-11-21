@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useCities } from '../contexts/CitiesContext';
 import styles from './City.module.css';
 import Spinner from './Spinner';
@@ -24,14 +24,14 @@ const flagemojiToPNG = flag => {
 
 function City() {
   const { id } = useParams();
-  const { getCity, currentCity, isLoading } = useCities();
+  const { getCity, currentCity } = useCities();
   const { cityName, emoji, date, notes } = currentCity;
 
   useEffect(
     function () {
       getCity(id);
     },
-    [id]
+    [id, getCity]
   );
 
   if (currentCity.id !== +id) return <Spinner />;
