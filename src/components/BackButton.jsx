@@ -7,7 +7,7 @@ function BackButton() {
     <Button
       type="back"
       onClick={e => {
-        e.preventDefault; // to prevent form from submitting automatically
+        e.preventDefault(); // to prevent form from submitting automatically
         navigate(-1); // will take us 1 step back in browser history
       }}
     >
